@@ -1,4 +1,4 @@
-# Lithium-Battery-Toy-Model**
+# Lithium-Battery-Toy-Model
 ## Sebastián Rincón Martínez
 This is a Lithium Battery Toy model, assuming mechanical bouncing on electrolyte, and electrons output zones. Gaussian distribution for electrons output is made, additional to temperature analysis on full battery.
 
@@ -252,3 +252,207 @@ def record_temperature(self):
        self.temp_left.append((self.t, T_0 + (T-T_0)*w_left)) 
        self.temp_anode.append((self.t, T_0+(T-T_0)*w_anode))
 ```
+## Cycle and end of cycles
+The code restarts with randomly located particles every 5 seconds. This section saves the gotten data about electrons output in every run, and restarts with different conditions.
+```
+def end_run(self):
+       self.exited.append(self.run_exit)
+       self.run_exit = 0
+       self.t = 0
+       self.initial_particles()
+```
+## Statistical Gaussian fit using from scipy, function norm
+Once the battery has completed at least three full discharge cycles, this function analyzes the historical data to calculate the mathematical average and consistency spread of electron crossings. It uses these values to map out a smooth bell-curve line on the interface.
+```
+def  gaussian_fit(self):
+       if len(self.exited) < 3:
+           return None
+       data = np.array(self.exited)
+       mu, sigma =  norm.fit(data) 
+
+       x_min = max(0, mu -4*sigma)
+       x_max = mu +4*sigma
+       x = np.linspace(x_min, x_max, 200)
+       pdf = norm.pdf(x, mu, sigma) 
+
+       return x, pdf, mu, sigma
+```
+## Figure and plot
+Now, visual setups are determined. Visually, simulation is divided in four sections: dynamical 3D simulation, Gaussian fit, temperatures comparison, and simulation information.
+```
+fig = plt.figure(figsize=(15,8))
+fig.patch.set_facecolor('#000000') 
+gs = gridspec.GridSpec (2,3, figure=fig,
+                        hspace = 0.45, wspace=0.35, 
+                        left = 0.05, right=0.97,
+                        top = 0.93, bottom=0.22)
+
+ax3d = fig.add_subplot(gs[0,0], projection='3d') 
+axG = fig.add_subplot(gs[0,1]) 
+axT = fig.add_subplot(gs[0,2]) 
+axI = fig.add_subplot(gs[1,:]) 
+
+for ax in (axG, axT, axI):
+    ax.set_facecolor('#0D0D1A')
+    ax.tick_params(colors = 'white')
+    for spine in ax.spines.values(): 
+        spine.set_color('#333333')
+
+ax3d.set_facecolor('#0D0D1A')
+fig.suptitle('Lithium ions toy model battery', color='White', fontsize=13, fontweight='bold')
+```
+## Buttons
+For making simulation user-friendly, buttons are applied for determining which electrolyte, and anode will be used, and how many of each particle will be in the simulation.
+```
+def make_radio(localization, labels, title):
+    ax = plt.axes(localization, facecolor='#1A1A2E')
+    b = RadioButtons(ax, labels, activecolor='cyan')
+    ax.set_title(title, color='white', fontsize=8)
+    for lb in b.labels:
+        lb.set_color('white')
+    return b
+
+b_n = make_radio([0.04, 0.03, 0.10, 0.13], ('5', '10', '15'), 'Number of particles')
+b_el = make_radio([0.17, 0.03, 0.10, 0.13], ('EC', 'LiPF6', 'DMC'), 'Electrolyte')
+b_an = make_radio([0.33, 0.03, 0.10, 0.13], (r'$CoO_4$', 'Li_metal', 'Silicon'), 'Anode')
+
+ax_pause = plt.axes([0.76,0.05,0.09,0.06])
+ax_pause.set_facecolor('#1A1A2E')
+btn_pause = Button(ax_pause, 'Pause/Resume', color='#1A1A2E', hovercolor='#333333')
+btn_pause.label.set_color('White')
+
+ax_save = plt.axes([0.87, 0.05,0.09, 0.06])
+ax_save.set_facecolor('#1A1A2E')
+btn_save=Button(ax_save, 'Save figures', color='#1A1A2E', hovercolor='#333333')
+btn_save.label.set_color('white')
+```
+## Rebuild after button pressed
+Another important fact about the simulation is that everything restarts if a button (different to pause and save) is pressed. All data is lost, so it's recomendeable to save figures when needed.
+```
+Battery = [LiIonBattery(10, 'EC', r'$CoO_4$')]
+paused = [False]
+
+def rebuild(*_):
+    n = int(b_n.value_selected) 
+    el = b_el.value_selected
+    an = b_an.value_selected
+    Battery[0] = LiIonBattery(n, el, an) 
+
+b_n.on_clicked(rebuild) 
+b_el.on_clicked(rebuild)
+b_an.on_clicked(rebuild)
+btn_pause.on_clicked(lambda _: paused.__setitem__(0, not paused[0]))
+```
+## Save of figures
+Battery screeeshot and Gaussian plots are saved to the system when Save figures button is pressed.
+```
+def savefigures(event): 
+    extent_3d = ax3d.get_window_extent().transformed(fig.dpi_scale_trans.inverted()) 
+    fig.savefig('Battery.png', bbox_inches=extent_3d.expanded(1.2,1.2), dpi=150) 
+
+    extent_g = axG.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    fig.savefig('BatteryGaussian.png', bbox_inches=extent_g.expanded(1.4,1.4),dpi=150)
+    print('Saved: Battery.png and BatteryGaussian.png')
+btn_save.on_clicked(savefigures)
+```
+## Window restart
+When simulation time 5 seconds is ended, full interface restarts, but Gaussian plot data is saved.
+```
+def update(_):
+    if paused[0]:
+        return
+    
+    B = Battery[0]
+    for i in range(4): 
+        B.step()
+    
+    if B.t >= 5.0:
+        B.end_run()
+    I,R,T,V = B.electrical()
+
+    # Graph 3D
+    ax3d.cla() 
+    ax3d.set_facecolor('#0D0D1A')
+    ax3d.set_xlim(0, 1); ax3d.set_ylim(0, 1); ax3d.set_zlim(0, 1)
+    ax3d.set_xlabel('x', color='white')
+    ax3d.set_ylabel('y', color='white')
+    ax3d.set_zlabel('z', color='white')
+    ax3d.tick_params(colors='white')
+    ax3d.set_title(f"t={B.t:.2f}s  run={len(B.exited)+1}  crossings={B.run_exit}",
+                   color='white', fontsize=9)
+
+    # Draw particles
+    for p in B.all:
+        ax3d.scatter(p.position[0], p.position[1], p.position[2], color = p.color(), s=22 if isinstance(p, Anode) else 10, depthshade=False)
+
+    # Gaussian plot
+    axG.cla()
+    axG.set_facecolor('#0D0D1A')
+    axG.set_title("Electrons per run", color='white', fontsize=9)
+    axG.set_xlabel("Crossings per run", color='white')
+    axG.set_ylabel("Density",           color='white')
+    axG.tick_params(colors='white')   
+    result = B.gaussian_fit()
+    if result:
+        x, pdf, mu, sigma = result
+        axG.hist(B.exited, bins='auto', density=True, color='#00B1DD', alpha=0.45, label=f'Runs:{len(B.exited)}') 
+        axG.plot(x, pdf, 'r-', lw=2, label = f'Average: {mu:.2f}. Spread: {sigma:.2f}')
+        axG.legend(fontsize=8, labelcolor='white', facecolor='#1A1A2E')
+    else:
+        remaining = 3-len(B.exited)
+        axG.text(0.5, 0.5, f'{remaining} more runs are required', ha='center', va='center', transform=axG.transAxes, color='#DDDDDD', fontsize=10)
+
+    # Temperature plot
+    axT.cla()
+    axT.set_facecolor('#0D0D1A')
+    axT.set_title("Temperature", color='white', fontsize=9)
+    axT.set_xlabel("Time (s)", color='white')
+    axT.set_ylabel("T (K)",    color='white')
+    axT.tick_params(colors='white')   
+
+    if B.temp_left:
+        ts, Tl = zip(*B.temp_left)  
+        axT.plot(ts, Tl, color='cyan', lw=1.5, label='Left side')
+    if B.temp_anode:
+        ts, Ta = zip(*B.temp_anode)
+        axT.plot(ts, Ta, color='Orange', lw=1.5, label='Anode') 
+    axT.legend(fontsize=8, labelcolor='white', facecolor='#1A1A2E')
+    
+    # Information bar
+    axI.cla()
+    axI.set_facecolor('#0d0d1a')
+    axI.axis('off')   
+    axI.text(0.02, 0.65, f"I = {I:.4f} A",      color='cyan',   fontsize=11, transform=axI.transAxes)
+    axI.text(0.20, 0.65, f"R = {R:.3f} Ω",       color='yellow', fontsize=11, transform=axI.transAxes)
+    axI.text(0.38, 0.65, f"T = {T:.1f} K",        color='tomato', fontsize=11, transform=axI.transAxes)
+    axI.text(0.56, 0.65, f"V = {V:.3f} V",        color='white',  fontsize=11, transform=axI.transAxes)
+    axI.text(0.02, 0.15,
+             f"Electrolyte: {B.electrolyte}   "
+             f"Anode: {B.anode}   "
+             f"Particles: {B.n}   "
+             f"Run {len(B.exited)+1}   "
+             f"({max(0, 5.0 - B.t):.1f}s left)",
+             color='#aaaaaa', fontsize=9, transform=axI.transAxes)
+```
+## Animation
+Finally, Matplotlib FuncAnimation function is used for dynamical activity of simulation, every 20ms
+```
+anim = FuncAnimation(fig, update, interval=20, cache_frame_data=False)
+ 
+plt.show()
+```
+
+# Interpretation
+Simulation is able to show temperature increases localized and in full battery, resistance, current and voltage.
+<img width="430" height="267" alt="image" src="https://github.com/user-attachments/assets/592588f3-5b24-423c-998a-351fef344c66" />
+<img width="878" height="39" alt="image" src="https://github.com/user-attachments/assets/8282858b-002d-42d5-80e1-a30ddc6c574f" />
+Past images are examples of electric properties data, and temperature's change with the time, for a first run of 10 particles, with electrolyte EC and $CoO_4$ in anode. Is seen that both sides increased their temperatures, suggesting preventie actions shall effectively be taken, particularly in high-mobility zone of cathode, where temperature increased significatively, ignoring, of course, heat disipation. Similar results were seen for other simulations. Current constantly increased, with LiPF6 and $CoO_4$ combination having the higher result, showing why this combination is used currently.
+
+Examples of batteries 3D representation are shown in the following images
+<img width="340" height="340" alt="Battery" src="https://github.com/user-attachments/assets/cc0de31c-ec9c-41a6-8aa9-62856f6f6d9f" />
+<img width="340" height="340" alt="Battery" src="https://github.com/user-attachments/assets/308bdc63-9538-4727-a98d-6b14c5ac0ae1" />
+As seen, simulation shows information about time, number of runs and crossed electrons in current run. Moreover, green particles show anodes, located at a same x position; blue particles represent electrons and red particles represent lithium ion. 
+
+But most attractive results are Gaussian fixes, shown in following images
+## $LiPF_6$-$CoO_4$ combination
+
