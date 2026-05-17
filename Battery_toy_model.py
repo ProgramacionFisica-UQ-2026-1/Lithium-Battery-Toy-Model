@@ -435,7 +435,7 @@ def update(_):
     if result:
         x, pdf, mu, sigma = result
         #Histogram of every run
-        axG.hist(B.exited, bins='auto', density=True, color='#00B1DD', alpha=0.45, label='Runs') #bins are intervals of division
+        axG.hist(B.exited, bins='auto', density=True, color='#00B1DD', alpha=0.45, label=f'Runs: {len(B.exited)}') #bins are intervals of division
         
     #Gaussian curve
         axG.plot(x, pdf, 'r-', lw=2, label = f'Average: {mu:.2f}. Spread: {sigma:.2f}')
