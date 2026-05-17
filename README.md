@@ -446,7 +446,9 @@ plt.show()
 Simulation is able to show temperature increases localized and in full battery, resistance, current and voltage.
 <img width="430" height="267" alt="image" src="https://github.com/user-attachments/assets/592588f3-5b24-423c-998a-351fef344c66" />
 <img width="878" height="39" alt="image" src="https://github.com/user-attachments/assets/8282858b-002d-42d5-80e1-a30ddc6c574f" />
-Past images are examples of electric properties data, and temperature's change with the time, for a first run of 10 particles, with electrolyte EC and $CoO_4$ in anode. Is seen that both sides increased their temperatures, suggesting preventie actions shall effectively be taken, particularly in high-mobility zone of cathode, where temperature increased significatively, ignoring, of course, heat disipation. Similar results were seen for other simulations. Current constantly increased, with LiPF6 and $CoO_4$ combination having the higher result, showing why this combination is used currently.
+<img width="445" height="269" alt="image" src="https://github.com/user-attachments/assets/9735180d-0ca3-4820-887b-0b116d68f665" />
+
+Past images are examples of electric properties data, and temperature's change with the time, for a first run of 10 particles, with electrolyte EC and $CoO_4$ in anode. Is seen that both sides increased their temperatures, suggesting preventie actions shall effectively be taken, particularly in high-mobility zone of cathode, where temperature increased significatively, ignoring, of course, heat disipation. Similar results were seen for other simulations. Current constantly increased, with LiPF6 and $CoO_4$ combination having the higher result, showing why this combination is used currently. But in other situations, as the one of third image ($DMC-CoO_4$ combination), temperature oscillates more, and is hard to control. 
 
 Examples of batteries 3D representation are shown in the following images
 <img width="340" height="340" alt="Battery" src="https://github.com/user-attachments/assets/cc0de31c-ec9c-41a6-8aa9-62856f6f6d9f" />
@@ -454,5 +456,23 @@ Examples of batteries 3D representation are shown in the following images
 As seen, simulation shows information about time, number of runs and crossed electrons in current run. Moreover, green particles show anodes, located at a same x position; blue particles represent electrons and red particles represent lithium ion. 
 
 But most attractive results are Gaussian fixes, shown in following images
-## $LiPF_6$-$CoO_4$ combination
+## $LiPF_6-CoO_4$ combination
+<img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/c1b3a06a-7a5a-4b4b-aef5-01cb6a38de50" />
+## $EC-CoO_4$ combination
+<img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/fb98a09a-f8bd-4e2c-9e61-9b6e63ced4a3" />
+## $DMC-CoO_4$ combination
+
+## $LiPF_6-$Li-metal combination
+
+## $EC_6-$ Li-metalcombination
+
+## $DMC_6-$ Li-metal combination
+
+## $LiPF_6-$ Silicon combination
+
+## $EC-$ Silicon combination
+
+## $DMC-$ Silicon combination
+
+Batteries efficiency depends on many factors, such as generated current, and charge duration. Is seen that $LiPF_6-CoO_4$ combination is not the one with more electrons exits, but it was the one with greatest currents, and is one of the simulations with lower spread. This shows the combination is not only able to generate big currents, but also allows control over the battery, more than other combinations. Moreover, it's not neccesary to have too many electrons exiting at low times, cause it will probably generate more current than needed, and will discharge too fast. Then, simulation allows comparisons for different variables to consider for a battery: charge duration, temperature, current, resistance and stability or certain measurement of control over the battery results.
 
