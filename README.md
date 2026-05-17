@@ -10,3 +10,25 @@ Problem is lithium is scarce in the nature. Then, it's important to optimize bat
 
 Additional to the low disponibility problem, lithium has also presented heating problems, since it's highly volatile. In the code, a simulation of temperature due to electrical flux is presented, as an opportunity for determining specifical zones in which major danger may be presented, and for taking future preventive actions.
 
+**CODE**
+Following section will explain the code separated by the most important steps.
+## Abstract class Particle
+This abstract class defines all the mechanical and electronical properties of particles in the system, and asks other classes to define their visual properties (color). This is the main class, that gives information about position, vectorial velocity, mass and charge.
+```
+from abc import ABC, abstractmethod
+import numpy as np
+
+class Particle(ABC):
+    def __init__(self, position, velocity, mass, charge):
+        self.position = np.asarray(position, float) 
+        self.velocity = np.asarray(velocity, float)
+        self.mass = float(mass)
+        self.charge = float(charge)
+
+    @abstractmethod
+    def color(self) -> str:
+        pass
+```
+
+
+
