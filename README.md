@@ -476,6 +476,7 @@ But most attractive results are Gaussian fixes, shown in following images
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/828842d6-0488-48e4-9e26-51f0167764e7" />
 
 ## $EC-$ Silicon combination
+<img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/aa1f6683-1f0a-41a8-ab25-af5d471ddd41" />
 
 ## $DMC-$ Silicon combination
 
