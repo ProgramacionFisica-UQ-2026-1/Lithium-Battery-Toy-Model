@@ -466,7 +466,8 @@ But most attractive results are Gaussian fixes, shown in following images
 ## $LiPF_6-$ Li-metal combination
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/fb49ce5b-6b1c-46eb-86a9-ce9f55b6afdd" />
 
-## $EC_6-$ Li-metalcombination
+## $EC-$ Li-metalcombination
+<img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/1b173592-c37e-4a17-8131-2a42d2b874b6" />
 
 ## $DMC_6-$ Li-metal combination
 
