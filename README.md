@@ -473,6 +473,7 @@ But most attractive results are Gaussian fixes, shown in following images
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/539ed6d6-4b9a-47cd-ae22-b8e02788d5fc" />
 
 ## $LiPF_6-$ Silicon combination
+<img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/828842d6-0488-48e4-9e26-51f0167764e7" />
 
 ## $EC-$ Silicon combination
 
