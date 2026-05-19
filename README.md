@@ -17,7 +17,68 @@ Additional to the low disponibility problem, lithium has also presented heating 
 - **Half battery located barrier** — separator barrier at x=0.5, electrons cannot cross rightward
 - Every 5 seconds the run resets with new random positions and a Gaussian fit is updated. Temperature in left (cathode) and anode side is calculated for the first run.
 ## Previous requirements
-
+- Python 3.9 or higher
+- pip
+---
+ 
+## Installation
+ 
+### 1. Clone or download the project
+ 
+Download the files and navigate to the folder in your terminal.
+ 
+---
+ 
+### 2. Create a virtual environment
+ 
+A virtual environment keeps the project dependencies isolated from your system Python.
+ 
+**On macOS / Linux:**
+```bash
+python3 -m venv venv
+```
+ 
+**On Windows:**
+```bash
+python -m venv venv
+```
+ 
+### 3. Activate the virtual environment
+ 
+**On macOS / Linux:**
+```bash
+source venv/bin/activate
+```
+ 
+**On Windows:**
+```bash
+venv\Scripts\activate
+```
+ 
+You should see `(venv)` appear at the start of your terminal line — this confirms the environment is active.
+ 
+### 4. Install dependencies
+ 
+```bash
+pip install -r Requirements.txt
+```
+ 
+This installs NumPy, Matplotlib and SciPy at the required versions.
+ ### 5. Run the simulation
+ 
+```bash
+python Battery_Toy_Model.py
+```
+ 
+## Controls
+ 
+| Control | Description |
+|---|---|
+| **# Particles** | Choose 5, 10 or 15 particles per species |
+| **Electrolyte** | EC (weak), DMC (medium), LiPF6 (strong bias force) |
+| **Anode** | CoO₄, Li-metal or Silicon — different charge strengths |
+| **Pause/Resume** | Freeze and unfreeze the simulation |
+| **Save figures** | Exports `Battery.png` and `BatteryGaussian.png` to current folder |
 
 # CODE
 
