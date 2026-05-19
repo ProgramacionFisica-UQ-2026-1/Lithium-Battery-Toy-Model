@@ -462,28 +462,36 @@ As seen, simulation shows information about time, number of runs and crossed ele
 
 But most attractive results are Gaussian fixes, shown in following images
 ## $LiPF_6-CoO_4$ combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/c1b3a06a-7a5a-4b4b-aef5-01cb6a38de50" />
 ## $EC-CoO_4$ combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/fb98a09a-f8bd-4e2c-9e61-9b6e63ced4a3" />
 ## $DMC-CoO_4$ combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/aab3bf00-6cc0-4677-a252-4dc2b57ffbe7" />
 
 ## $LiPF_6-$ Li-metal combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/fb49ce5b-6b1c-46eb-86a9-ce9f55b6afdd" />
 
 ## $EC-$ Li-metalcombination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/1b173592-c37e-4a17-8131-2a42d2b874b6" />
 
 ## $DMC-$ Li-metal combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/539ed6d6-4b9a-47cd-ae22-b8e02788d5fc" />
 
 ## $LiPF_6-$ Silicon combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/828842d6-0488-48e4-9e26-51f0167764e7" />
 
 ## $EC-$ Silicon combination
+
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/aa1f6683-1f0a-41a8-ab25-af5d471ddd41" />
 
 ## $DMC-$ Silicon combination
 
-Batteries efficiency depends on many factors, such as generated current, and charge duration. Is seen that $LiPF_6-CoO_4$ combination is not the one with more electrons exits, but it was the one with greatest currents, and is one of the simulations with lower spread. This shows the combination is not only able to generate big currents, but also allows control over the battery, more than other combinations. Moreover, it's not neccesary to have too many electrons exiting at low times, cause it will probably generate more current than needed, and will discharge too fast. Then, simulation allows comparisons for different variables to consider for a battery: charge duration, temperature, current, resistance and stability or certain measurement of control over the battery results.
+Batteries efficiency depends on many factors, such as generated current, and charge duration. Is seen that $LiPF_6-CoO_4$ combination is not the one with more electrons exits, but it was the one with greatest currents, and is one of the simulations with lower spread ($\sigma=1.67$). This shows the combination is not only able to generate big currents, but also allows control over the battery, more than other combinations. Moreover, it's not neccesary to have too many electrons exiting at low times, cause it will probably generate more current than needed, and battery will discharge too fast. Then, simulation allows comparisons for different variables to consider for a battery: charge duration, temperature, current, resistance and stability or certain measurement of control over the battery results.
 
