@@ -464,10 +464,10 @@ But most attractive results are Gaussian fixes, shown in following images
 ## $LiPF_6-CoO_4$ combination
 
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/c1b3a06a-7a5a-4b4b-aef5-01cb6a38de50" />
-## $EC-CoO_4$ combination
+## EC-$CoO_4$ combination
 
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/fb98a09a-f8bd-4e2c-9e61-9b6e63ced4a3" />
-## $DMC-CoO_4$ combination
+## DMC-$CoO_4$ combination
 
 <img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/aab3bf00-6cc0-4677-a252-4dc2b57ffbe7" />
 
