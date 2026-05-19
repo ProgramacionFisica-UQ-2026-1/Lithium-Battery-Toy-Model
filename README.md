@@ -9,8 +9,18 @@ Increasing in use of electrical cars has a consequence: increase on lithium dema
 Problem is lithium is scarce in the nature. Then, it's important to optimize batteries, for reducing as much as possible the lithium waste. That's why this toy model is designed as a starting point for a program able to simulate battery electrical behavior and efficiency when using different materials combinations in anode, cathode and electrolyte, correspondent to the main parts of a functional battery. In this case, only electrical forces will be considered, ignoring chemical reactions or disipative forces.
 
 Additional to the low disponibility problem, lithium has also presented heating problems, since it's highly volatile. In the code, a simulation of temperature due to electrical flux is presented, as an opportunity for determining specifical zones in which major danger may be presented, and for taking future preventive actions.
+## What does it simulate?
+ 
+- **Blue particles** — electrons, accelerated by external arbitrary electrolyte field and Coulomb forces
+- **Red particles** — lithium ions, 1265× heavier.
+- **Green particles** — anode sites, fixed, capture orbiting electrons (shown in cyan)
+- **Half battery located barrier** — separator barrier at x=0.5, electrons cannot cross rightward
+- Every 5 seconds the run resets with new random positions and a Gaussian fit is updated. Temperature in left (cathode) and anode side is calculated for the first run.
+## Previous requirements
 
-**CODE**
+
+# CODE
+
 Following section will explain the code separated by the most important steps.
 ## Abstract class Particle
 This abstract class defines all the mechanical and electronical properties of particles in the system, and asks other classes to define their visual properties (color). This is the main class, that gives information about position, vectorial velocity, mass and charge. Needed libraries are numpy, matplotlib and scipy.
