@@ -493,5 +493,8 @@ But most attractive results are Gaussian fixes, shown in following images
 
 ## $DMC-$ Silicon combination
 
+<img width="678" height="397" alt="BatteryGaussian" src="https://github.com/user-attachments/assets/6aa41d41-7000-4a22-be20-e94752cece27" />
+
+
 Batteries efficiency depends on many factors, such as generated current, and charge duration. Is seen that $LiPF_6-CoO_4$ combination is not the one with more electrons exits, but it was the one with greatest currents, and is one of the simulations with lower spread ($\sigma=1.67$). This shows the combination is not only able to generate big currents, but also allows control over the battery, more than other combinations. Moreover, it's not neccesary to have too many electrons exiting at low times, cause it will probably generate more current than needed, and battery will discharge too fast. Then, simulation allows comparisons for different variables to consider for a battery: charge duration, temperature, current, resistance and stability or certain measurement of control over the battery results.
 
