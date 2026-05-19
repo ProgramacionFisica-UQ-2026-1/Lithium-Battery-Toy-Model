@@ -13,10 +13,15 @@ Additional to the low disponibility problem, lithium has also presented heating 
 **CODE**
 Following section will explain the code separated by the most important steps.
 ## Abstract class Particle
-This abstract class defines all the mechanical and electronical properties of particles in the system, and asks other classes to define their visual properties (color). This is the main class, that gives information about position, vectorial velocity, mass and charge.
+This abstract class defines all the mechanical and electronical properties of particles in the system, and asks other classes to define their visual properties (color). This is the main class, that gives information about position, vectorial velocity, mass and charge. Needed libraries are numpy, matplotlib and scipy.
 ```
 from abc import ABC, abstractmethod
 import numpy as np
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+from matplotlib.animation import FuncAnimation
+from matplotlib.widgets import Button, RadioButtons
 
 class Particle(ABC):
     def __init__(self, position, velocity, mass, charge):
